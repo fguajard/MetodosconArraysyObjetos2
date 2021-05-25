@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Centro Médico Ñuñoa</title>
+    <!-- Boostrap 4.6 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <!-- Fonts Roboto -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    
+</head>
+
+<body>
+    
+    <div class="container" id="container">       
+        
+    </div>
+    
+    <div class="container" id="printDental">
+        <h2 class="text-center py-4"> Horas Dental</h2>
+        <button type="button" class="btn btn-secondary d-none d-block m-auto p-2" id="buttonDental">Imprimir Horas Dental</button>
+    </div>
+
+    <div class="container" id="printPacientes">
+        <h2 class="text-center py-4"> Pacientes</h2>
+        <div class="row">
+            <div class="col-6" id="printPacientesLeft">
+            </div>
+            <div class="col-6" id="printPacientesRight">
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary d-none d-block m-auto p-2" id="buttonPacientes">Imprimir lista de pacientes</button>
+    </div>
+
+    <script>
+        
+        
+        var radiologia = [
+            {hora: '11:00', especialista: 'IGNACIO SCHULZ', paciente: 'FRANCISCA ROJAS', rut: '9878782-1', prevision: 'FONASA'},
+            {hora: '11:30', especialista: 'FEDERICO SUBERCASEAUX', paciente: 'PAMELA ESTRADA', rut: '15345241-3', prevision: 'ISAPRE'},
+            {hora: '15:00', especialista: 'FERNANDO WURTHZ', paciente: 'ARMANDO LUNA', rut: '16445345-9', prevision: 'ISAPRE'},
+            {hora: '15:30', especialista: 'ANA MARIA GODOY', paciente: 'MANUEL GODOY', rut: '17666419-0', prevision: 'FONASA'},
+            {hora: '16:00', especialista: 'PATRICIA SUAZO', paciente: 'RAMON ULLOA', rut: '14989389-K', prevision: 'FONASA'},
+        ];
+        
+        var traumatologia = [
+            {hora: '8:00',  especialista: 'MARIA PAZ ALTUZARRA', paciente: 'PAULA SANCHEZ',     rut: '15554774-5', prevision: 'FONASA'},
+            {hora: '10:00', especialista: 'RAUL ARAYA',          paciente: 'ANGÉLICA NAVAS',    rut: '15444147-9', prevision: 'ISAPRE'},
+            {hora: '10:30', especialista: 'MARIA ARRIAGADA',     paciente: 'ANA KLAPP',         rut: '17879423-9', prevision: 'ISAPRE'},
+            {hora: '11:00', especialista: 'ALEJANDRO BADILLA',   paciente: 'FELIPE MARDONES',   rut: '1547423-6', prevision: 'ISAPRE'},
+            {hora: '11:30', especialista: 'CECILIA BUDNIK',      paciente: 'DIEGO MARRE',       rut: '16554741-K', prevision: 'FONASA'},
+            {hora: '12:00', especialista: 'ARTURO CAVAGNARO',    paciente: 'CECILIA MENDEZ',    rut: '9747535-8', prevision: 'ISAPRE'},
+            {hora: '12:30', especialista: 'ANDRES KANACRI',      paciente: 'MARCIAL SUAZO',     rut: '11254785-5', prevision: 'ISAPRE'},
+        ];
+        
+        var dental = [
+            {hora: '8:30',  especialista: 'ANDREA ZUÑIGA',          paciente: 'MARCELA RETAMAL',rut: '11123425-6', prevision: 'ISAPRE'},
+            {hora: '11:00', especialista: 'MARIA PIA ZAÑARTU',      paciente: 'ANGEL MUÑOZ',    rut: '9878789-2',  prevision: 'ISAPRE'},
+            {hora: '11:30', especialista: 'SCARLETT WITTING',       paciente: 'MARIO KAST',     rut: '7998789-5',  prevision: 'FONASA'},
+            {hora: '13:00', especialista: 'FRANCISCO VON TEUBER',   paciente: 'KARIN FERNANDEZ',rut: '18887662-K', prevision: 'FONASA'},
+            {hora: '13:30', especialista: 'EDUARDO VIÑUELA',        paciente: 'HUGO SANCHEZ',   rut: '17665461-4', prevision: 'FONASA'},
+            {hora: '14:00', especialista: 'RAQUEL VILLASECA',       paciente: 'ANA SEPULVEDA',  rut: '14441281-0', prevision: 'ISAPRE'},
+        ];
+
+        const textoOrdenado = document.getElementById("container")       
+        textoOrdenado.innerHTML +='<h2 class="text-center py-4">Estadisticas Centro Medico Ñuñoa</h2>'
+        textoOrdenado.innerHTML +=`<p>Cantidad de atenciones para Radiología: ${radiologia.length}</p>`
+        textoOrdenado.innerHTML +=`<p>Cantidad de atenciones para Traumatología: ${traumatologia.length}</p>`
+        textoOrdenado.innerHTML +=`<p>Cantidad de atenciones para Dental: ${dental.length}</p>`       
+        textoOrdenado.innerHTML +=`<p>Primera atencion: ${radiologia[0].paciente} - ${radiologia[0].prevision} | Última atención: ${radiologia[radiologia.length -1].paciente} - ${radiologia[radiologia.length -1].prevision}.</p>`
+        textoOrdenado.innerHTML +=`<p>Primera atencion: ${traumatologia[0].paciente} - ${traumatologia[0].prevision} | Última atención: ${traumatologia[traumatologia.length -1].paciente} - ${traumatologia[traumatologia.length -1].prevision}.</p>`
+        textoOrdenado.innerHTML +=`<p>Primera atencion: ${dental[0].paciente} - ${dental[0].prevision} | Última atención: ${dental[dental.length -1].paciente} - ${dental[dental.length -1].prevision}.</p>`
+        
+        //Agregar código para el desafio 2 aquí
+
+
+        //Transforma el tiempo un numero, mientras menor el numero, mas arriba en la lista de horas estara
+        const transformTime = (paciente) =>{            
+            let {hora} = paciente
+            const arrayHora = hora.split(":")            
+            var date = new Date(2021, 04, 24,+arrayHora[0],+arrayHora[1]);
+            return date.getTime()
+        }
+        //ordena el arreglo pasado como argumento deacuerdo a la hora
+        const arrangeByTime = (especialidad) => {            
+            especialidad.sort((a, b) => transformTime(a) - transformTime(b))
+        }
+        
+        //agregar horas a Traumatologia
+        let horasNuevas = [
+            {hora: '09:00',  especialista: 'RENÉ POBLETE',          paciente: 'ANA GELLONA',rut: '13123329-7', prevision: 'ISAPRE'},
+            {hora: '09:30', especialista: 'MARIA SOLAR',      paciente: 'RAMIRO ANDRADE',    rut: '12221451-K',  prevision: 'FONASA'},
+            {hora: '10:00', especialista: 'RAUL LOYOLA',       paciente: 'CARMEN ISLA',     rut: '10112348-3',  prevision: 'ISAPRE'},
+            {hora: '10:30', especialista: 'ANTONIO LARENAS',   paciente: 'PABLO LOAYZA',rut: '13453234-1', prevision: 'ISAPRE'},
+            {hora: '12:00', especialista: 'MATIAS ARAVENA',        paciente: 'SUSANA POBLETE',   rut: '14345656-6', prevision: 'FONASA'},           
+        ];
+        
+        traumatologia=traumatologia.concat(horasNuevas)
+        arrangeByTime(traumatologia)
+        
+
+        //eliminar primer y utlimo elemento de Radiologia
+        radiologia.shift()
+        radiologia.pop()
+
+        //imprimir por pantalla las consultas medicas de dental
+        const printDentalInHtml = () =>{
+            const printDental = document.getElementById("printDental")        
+            dental.forEach((paciente)=>{
+                const printLine = Object.values(paciente).join("-")
+                printDental.innerHTML += `<p>${printLine} </p>`
+            })
+        }
+        const buttonDental = document.getElementById("buttonDental")
+        buttonDental.addEventListener("click", ()=>{
+            buttonDental.classList.remove("d-block")
+            printDentalInHtml()
+
+        })
+
+       //
+
+       //Imprimir todos los pacientes
+
+       //ordena los objetos por nombre
+       const orderarNombre = (especialidad) =>{
+           const ordenado = especialidad.sort((a,b)=>{
+               if(a.paciente > b.paciente) return 1
+               if(a.paciente < b.paciente) return -1            
+            })
+            return ordenado
+       }
+     
+       const printPacientesHtml = () =>{
+           let count = 0;
+           const printPacientesLeft = document.getElementById("printPacientesLeft")
+           const printPacientesRight = document.getElementById("printPacientesRight")
+           let todosLosPacientes = radiologia.concat(traumatologia,dental)
+            todosLosPacientes = orderarNombre(todosLosPacientes)
+           todosLosPacientes.forEach(({paciente}) => {
+                count++                
+                if(count<=Math.round(todosLosPacientes.length/2))
+                printPacientesLeft.innerHTML += `<p>${paciente}</p>`
+                else                
+                printPacientesRight.innerHTML += `<p>${paciente}</p>`
+           })
+       }
+
+       const buttonPacientes = document.getElementById("buttonPacientes")
+        buttonPacientes.addEventListener("click", ()=>{
+            buttonPacientes.classList.remove("d-block")
+            printPacientesHtml()
+        })
+
+        
+       //filtrar pacientes
+       const filtrarPacientes = (especialidad,previsionConsulta) =>{           
+          const resultado =  especialidad.filter(({prevision}) => prevision == previsionConsulta)
+          return resultado
+       }
+       
+       console.log( filtrarPacientes(dental,"ISAPRE"));
+       console.log( filtrarPacientes(traumatologia,"FONASA"));
+      
+         
+        //Agregar código para el desafio 2 aquí
+        
+        
+        
+        </script>
+
+    <!-- Jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+      integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+      crossorigin="anonymous"
+    ></script>
+    <!-- console code extraido de https://markknol.github.io/console-log-viewer/console-log-viewer.js -->
+</body>
+</html>
